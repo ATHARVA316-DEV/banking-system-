@@ -31,7 +31,7 @@ A secure, file-based banking interface written purely in C. Developed by a team 
 
 ## 🧩 System Architecture
 
-```plaintext
+
                         +--------------------+
                         |    Main Menu       |
                         +--------------------+
@@ -49,6 +49,7 @@ A secure, file-based banking interface written purely in C. Developed by a team 
      +----------------------------+     +----------------------------+
      | File Storage (accounts.db) |<--->| File Storage (txnlog.db)  |
      +----------------------------+     +----------------------------+
+--
 
 
 
@@ -66,8 +67,7 @@ A secure, file-based banking interface written purely in C. Developed by a team 
 ---
 
 ## ▶️ Usage
-
-```bash
+bash
 # Compile the project
 gcc main.c user.c transaction.c security.c filemanager.c utils.c -o bank
 
