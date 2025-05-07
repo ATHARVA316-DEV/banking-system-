@@ -4,8 +4,8 @@ A secure and efficient banking system built purely in C. Features include user a
 
 A secure, file-based banking interface written purely in C. Developed by a team of PES University students, it features user and transaction management, authentication, data storage, and robust error handling.
 
----
-##👨‍💻 Team
+## 👨‍💻 Team
+
 Atharva M
 
 Aryan Singh
@@ -15,7 +15,6 @@ Anvith Vegi
 Anvi Srinivas
 
 Project developed at PES University as part of foundational systems programming.
----
 
 
 ## 📋 Table of Contents
