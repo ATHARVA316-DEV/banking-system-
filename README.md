@@ -1,6 +1,6 @@
 # banking-system-
 A secure and efficient banking system built purely in C. Features include user account management, transactions, password encryption, role-based access, file-based data storage, and robust error handling.
-# 🏦 Silly Savings – A C-Based Banking System
+# 🏦 Silly Savings –  C-Based Banking System
 
 A secure, file-based banking interface written purely in C. Developed by a team of PES University students, it features user and transaction management, authentication, data storage, and robust error handling.
 
