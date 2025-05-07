@@ -51,7 +51,6 @@ A secure, file-based banking interface written purely in C. Developed by a team 
      +----------------------------+     +----------------------------+
 
 
----
 
 ## 🧱 Module Overview
 
