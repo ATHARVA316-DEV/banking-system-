@@ -49,3 +49,28 @@ A secure, file-based banking interface written purely in C. Developed by a team 
      +----------------------------+     +----------------------------+
      | File Storage (accounts.db) |<--->| File Storage (txnlog.db)  |
      +----------------------------+     +----------------------------+
+
+
+---
+
+## 🧱 Module Overview
+
+| File             | Description                                |
+|------------------|--------------------------------------------|
+| `main.c`         | Entry point, menu system                   |
+| `user.c`         | Account creation, update, delete, view     |
+| `transaction.c`  | Deposit, withdrawal, transfer, history     |
+| `security.c`     | Login system, hashing, access control      |
+| `filemanager.c`  | File operations, backups, logging          |
+| `utils.c`        | Input validation, formatting, utilities    |
+
+---
+
+## ▶️ Usage
+
+```bash
+# Compile the project
+gcc main.c user.c transaction.c security.c filemanager.c utils.c -o bank
+
+# Run the application
+./bank
