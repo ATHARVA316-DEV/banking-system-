@@ -70,6 +70,18 @@ A secure, file-based banking interface written purely in C. Developed by a team 
 bash
 # Compile the project
 gcc main.c user.c transaction.c security.c filemanager.c utils.c -o bank
+ 
 
-# Run the application
-./bank
+
+## 🧠 How It Works
+[User Input]
+     |
+     v
+[Validation] ---> [Authentication]
+     |                    |
+     v                    v
+[Main Menu] -------> [Admin/User Functions]
+     |
+     v
+[Operations] ---> [File Storage]
+
