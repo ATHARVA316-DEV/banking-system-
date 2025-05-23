@@ -1,1 +1,0 @@
-gcc main.c user.c transaction.c filemanager.c security.c utils.c -o bankingApp
