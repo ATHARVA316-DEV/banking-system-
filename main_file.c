@@ -120,4 +120,28 @@ void add_transaction(int acc_number, const char *type, float amount, float balan
     
     trans_count++;
 }
+void save_data() {
+    FILE *fp = fopen(FILENAME, "wb");
+    if (fp == NULL) {
+        printf("Error: Could not open file for saving.\n");
+        return;
+    }
+    
+    fwrite(&acc_count, sizeof(int), 1, fp);
+    fwrite(accounts, sizeof(Account), acc_count, fp);
+    fclose(fp);
+    
+    // Save transactions
+    fp = fopen(TRANSACTION_FILE, "wb");
+    if (fp == NULL) {
+        printf("Error: Could not open transaction file for saving.\n");
+        return;
+    }
+    
+    fwrite(&trans_count, sizeof(int), 1, fp);
+    fwrite(transactions, sizeof(Transaction), trans_count, fp);
+    fclose(fp);
+    
+    printf("Data saved successfully.\n");
+}
 
