@@ -246,3 +246,283 @@ void search_account() {
         printf("Created On: %s\n", accounts[index].created_date);
     }
 }
+
+void modify_account() {
+    int acc_number;
+    
+    printf("Enter Account Number to modify: ");
+    scanf("%d", &acc_number);
+    
+    int index = find_account_index(acc_number);
+    if (index == -1) {
+        printf("Account not found or inactive.\n");
+        return;
+    }
+    
+    printf("\nCurrent Account Details:\n");
+    printf("1. Name: %s\n", accounts[index].name);
+    printf("2. Address: %s\n", accounts[index].address);
+    printf("3. Phone: %s\n", accounts[index].phone);
+    
+    int choice;
+    printf("\nWhat would you like to modify?\n");
+    printf("1. Name\n2. Address\n3. Phone\n4. Cancel\n");
+    printf("Enter choice: ");
+    scanf("%d", &choice);
+    
+    clear_input_buffer();
+    
+    switch(choice) {
+        case 1:
+            printf("Enter New Name: ");
+            fgets(accounts[index].name, sizeof(accounts[index].name), stdin);
+            accounts[index].name[strcspn(accounts[index].name, "\n")] = 0;
+            printf("Name updated successfully.\n");
+            break;
+        case 2:
+            printf("Enter New Address: ");
+            fgets(accounts[index].address, sizeof(accounts[index].address), stdin);
+            accounts[index].address[strcspn(accounts[index].address, "\n")] = 0;
+            printf("Address updated successfully.\n");
+            break;
+        case 3:
+            do {
+                printf("Enter New Phone: ");
+                fgets(accounts[index].phone, sizeof(accounts[index].phone), stdin);
+                accounts[index].phone[strcspn(accounts[index].phone, "\n")] = 0;
+                
+                if (!is_valid_phone(accounts[index].phone)) {
+                    printf("Invalid phone number format. Please try again.\n");
+                }
+            } while (!is_valid_phone(accounts[index].phone));
+            printf("Phone updated successfully.\n");
+            break;
+        case 4:
+            printf("Modification cancelled.\n");
+            return;
+        default:
+            printf("Invalid choice.\n");
+            return;
+    }
+    
+    save_data();
+}
+
+void delete_account() {
+    int acc_number;
+    char confirm;
+    
+    printf("Enter Account Number to delete: ");
+    scanf("%d", &acc_number);
+    
+    int index = find_account_index(acc_number);
+    if (index == -1) {
+        printf("Account not found or already inactive.\n");
+        return;
+    }
+    
+    printf("\nAccount Details:\n");
+    printf("Name: %s\n", accounts[index].name);
+    printf("Balance: %.2f\n", accounts[index].balance);
+    
+    clear_input_buffer();
+    printf("Are you sure you want to delete this account? (y/n): ");
+    scanf("%c", &confirm);
+    
+    if (confirm == 'y' || confirm == 'Y') {
+        // Soft delete - just mark as inactive
+        accounts[index].is_active = 0;
+        printf("Account deleted successfully.\n");
+        save_data();
+    } else {
+        printf("Account deletion cancelled.\n");
+    }
+}
+
+void view_transactions() {
+    int acc_number;
+    
+    printf("Enter Account Number: ");
+    scanf("%d", &acc_number);
+    
+    int index = find_account_index(acc_number);
+    if (index == -1) {
+        printf("Account not found or inactive.\n");
+        return;
+    }
+    
+    printf("\n==== Transaction History for Account %d ====\n", acc_number);
+    printf("%-20s %-15s %-12s %-12s\n", "Date", "Type", "Amount", "Balance");
+    printf("----------------------------------------------------------------\n");
+    
+    int found = 0;
+    for (int i = 0; i < trans_count; i++) {
+        if (transactions[i].acc_number == acc_number) {
+            printf("%-20s %-15s $%-11.2f $%-11.2f\n", 
+                   transactions[i].date, 
+                   transactions[i].type, 
+                   transactions[i].amount,
+                   transactions[i].balance_after);
+            found = 1;
+        }
+    }
+    
+    if (!found) {
+        printf("No transactions found for this account.\n");
+    }
+    printf("----------------------------------------------------------------\n");
+}
+
+void generate_statement() {
+    int acc_number;
+    
+    printf("Enter Account Number: ");
+    scanf("%d", &acc_number);
+    
+    int index = find_account_index(acc_number);
+    if (index == -1) {
+        printf("Account not found or inactive.\n");
+        return;
+    }
+    
+    char filename[50];
+    sprintf(filename, "statement_%d.txt", acc_number);
+    
+    FILE *fp = fopen(filename, "w");
+    if (fp == NULL) {
+        printf("Error: Could not create statement file.\n");
+        return;
+    }
+    
+    fprintf(fp, "=====================================================\n");
+    fprintf(fp, "                   BANK STATEMENT                   \n");
+    fprintf(fp, "=====================================================\n\n");
+    
+    fprintf(fp, "Account Number: %d\n", accounts[index].acc_number);
+    fprintf(fp, "Account Holder: %s\n", accounts[index].name);
+    fprintf(fp, "Address: %s\n", accounts[index].address);
+    fprintf(fp, "Phone: %s\n\n", accounts[index].phone);
+    
+    char current_date[20];
+    get_current_date(current_date);
+    fprintf(fp, "Statement Date: %s\n", current_date);
+    fprintf(fp, "Current Balance: $%.2f\n\n", accounts[index].balance);
+    
+    fprintf(fp, "Transaction History:\n");
+    fprintf(fp, "%-20s %-20s %-12s %-12s\n", "Date", "Description", "Amount", "Balance");
+    fprintf(fp, "---------------------------------------------------------------------\n");
+    
+    for (int i = 0; i < trans_count; i++) {
+        if (transactions[i].acc_number == acc_number) {
+            fprintf(fp, "%-20s %-20s $%-11.2f $%-11.2f\n", 
+                   transactions[i].date, 
+                   transactions[i].type, 
+                   transactions[i].amount,
+                   transactions[i].balance_after);
+        }
+    }
+    
+    fprintf(fp, "---------------------------------------------------------------------\n");
+    fprintf(fp, "\nThank you for banking with us!\n");
+    
+    fclose(fp);
+    printf("Statement generated successfully: %s\n", filename);
+}
+
+void search_by_name() {
+    char search_name[100];
+    int found = 0;
+    
+    printf("Enter name to search (partial name is okay): ");
+    clear_input_buffer();
+    fgets(search_name, sizeof(search_name), stdin);
+    search_name[strcspn(search_name, "\n")] = 0; // Remove newline
+    
+    // Convert search string to lowercase for case-insensitive search
+    for (int i = 0; search_name[i]; i++) {
+        search_name[i] = tolower(search_name[i]);
+    }
+    
+    printf("\nSearch Results:\n");
+    printf("%-10s %-20s %-15s %-10s\n", "Acc No", "Name", "Phone", "Balance");
+    printf("--------------------------------------------------------\n");
+    
+    for (int i = 0; i < acc_count; i++) {
+        if (accounts[i].is_active) {
+            // Make a lowercase copy of the account name for comparison
+            char temp_name[100];
+            strcpy(temp_name, accounts[i].name);
+            for (int j = 0; temp_name[j]; j++) {
+                temp_name[j] = tolower(temp_name[j]);
+            }
+            
+            if (strstr(temp_name, search_name) != NULL) {
+                printf("%-10d %-20s %-15s %-10.2f\n", 
+                       accounts[i].acc_number, 
+                       accounts[i].name, 
+                       accounts[i].phone,
+                       accounts[i].balance);
+                found = 1;
+            }
+        }
+    }
+    
+    if (!found) {
+        printf("No matching accounts found.\n");
+    }
+}
+
+int main() {
+    // Seed random number generator
+    srand(time(NULL));
+    
+    // Load data from file if it exists
+    load_data();
+    
+    int choice;
+    
+    do {
+        printf("\n============================================\n");
+        printf("        ADVANCED BANKING SYSTEM MENU        \n");
+        printf("============================================\n");
+        printf("1.  Create New Account\n");
+        printf("2.  View All Accounts\n");
+        printf("3.  Deposit\n");
+        printf("4.  Withdraw\n");
+        printf("5.  Transfer Funds\n");
+        printf("6.  Search Account\n");
+        printf("7.  Modify Account\n");
+        printf("8.  Delete Account\n");
+        printf("9.  View Transactions\n");
+        printf("10. Generate Account Statement\n");
+        printf("11. Search by Name\n");
+        printf("0.  Exit\n");
+        printf("--------------------------------------------\n");
+        printf("Choose an option (0-11): ");
+        scanf("%d", &choice);
+        
+        switch (choice) {
+            case 1: create_account(); break;
+            case 2: view_accounts(); break;
+            case 3: deposit(); break;
+            case 4: withdraw(); break;
+            case 5: transfer_funds(); break;
+            case 6: search_account(); break;
+            case 7: modify_account(); break;
+            case 8: delete_account(); break;
+            case 9: view_transactions(); break;
+            case 10: generate_statement(); break;
+            case 11: search_by_name(); break;
+            case 0: 
+                printf("Saving data before exit...\n");
+                save_data();
+                printf("Thank you for using the banking system!\n");
+                break;
+            default: 
+                printf("Invalid choice. Please try again.\n");
+        }
+        
+    } while (choice != 0);
+    
+    return 0;
+}
