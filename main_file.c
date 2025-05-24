@@ -26,3 +26,8 @@ typedef struct {
     char date[20];
     float balance_after;
 } Transaction;
+
+Account accounts[MAX_ACCOUNTS];
+Transaction transactions[MAX_TRANSACTIONS * MAX_ACCOUNTS]; // Multiple transactions per account
+int acc_count = 0;
+int trans_count = 0;
