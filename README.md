@@ -72,17 +72,3 @@ Project developed at PES University as part of foundational systems programming.
 
 ---
 
-
-
-3️⃣ Detailed Data Flow
-+------------+          +-------------------+          +----------------------+
-|   User     | <----->  |   Core Functions  | <----->  |   Data Files         |
-+------------+          +-------------------+          +----------------------+
-      |                         |                               |
-      |                         |                               |
-      | Inputs commands         | Calls functions, reads/writes | Reads/Writes .dat files
-      |                         |                               |
-      v                         v                               v
-CLI Menu <--------------------> Account/Transaction Management <-> bank_data.dat / transactions.dat
-
-
