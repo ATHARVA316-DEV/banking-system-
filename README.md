@@ -56,7 +56,7 @@ Project developed at PES University as part of foundational systems programming.
          
 
 
-## 🧱 Code Overview 
+##  Code Overview 
 
 | Part                  | Description                                   |
 |-----------------------|-----------------------------------------------|
