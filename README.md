@@ -41,52 +41,21 @@ Project developed at PES University as part of foundational systems programming.
 
 ## 🧩 System Architecture
 
-Banking Management System
-│
-├── Global Definitions & Constants
-│   ├── #includes (stdio.h, stdlib.h, string.h, etc.)
-│   ├── #defines (MAX_ACCOUNTS, FILE NAMES, etc.)
-│   ├── Structs
-│   │   ├── Account
-│   │   └── Transaction
-│   ├── Global Variables
-│       ├── accounts[]
-│       ├── transactions[]
-│       ├── acc_count
-│       └── trans_count
-│
-├── Utility Functions
-│   ├── clear_input_buffer()
-│   ├── is_valid_phone()
-│   ├── get_valid_amount()
-│   ├── get_current_date()
-│   └── generate_account_number()
-│
-├── Transaction Management
-│   └── add_transaction()
-│
-├── File Operations
-│   ├── save_data()
-│   └── load_data()
-│
-├── Account Operations
-│   ├── create_account()
-│   ├── view_accounts()
-│   ├── find_account_index()
-│   ├── deposit()
-│   ├── withdraw()
-│   ├── transfer_funds()
-│   ├── search_account()
-│   ├── modify_account()
-│   ├── delete_account()
-│
-├── Reporting
-│   ├── view_transactions()
-│   ├── generate_statement()
-│   └── search_by_name()
-│
-└── (Main Menu Logic - assumed but not shown in the snippet)
-
++-----------------------------------+
+|         Banking System            |
+|-----------------------------------|
+|   User Interaction (CLI/Console)  |
+|-----------------------------------|
+|   Core Functional Modules         |
+|   - Account Management            |
+|   - Transaction Management        |
+|   - Search & Reporting            |
+|   - Data Persistence              |
+|-----------------------------------|
+|   Data Storage Files              |
+|   - bank_data.dat                 |
+|   - transactions.dat              |
+|-----------------------------------|
          
 
 
@@ -105,15 +74,14 @@ Banking Management System
 
 
 
-## 🧠 How It Works
-[User Input]
-     |
-     v
-[Validation] ---> [Authentication]
-     |                    |
-     v                    v
-[Main Menu] -------> [Admin/User Functions]
-     |
-     v
-[Operations] ---> [File Storage]
+3️⃣ Detailed Data Flow
++------------+          +-------------------+          +----------------------+
+|   User     | <----->  |   Core Functions  | <----->  |   Data Files         |
++------------+          +-------------------+          +----------------------+
+      |                         |                               |
+      |                         |                               |
+      | Inputs commands         | Calls functions, reads/writes | Reads/Writes .dat files
+      |                         |                               |
+      v                         v                               v
+CLI Menu <--------------------> Account/Transaction Management <-> bank_data.dat / transactions.dat
 
