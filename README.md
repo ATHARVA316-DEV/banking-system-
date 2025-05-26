@@ -33,7 +33,6 @@ Project developed at PES University as part of foundational systems programming.
 
 - **👥 User Management:** Create, update, delete, and view account details.
 - **💰 Transactions:** Deposit, withdraw, transfer funds, view history.
-- **🔐 Security:** Username/password login, SHA-256 password hashing, role-based access.
 - **💾 File-Based Storage:** Persistent storage using binary files with struct serialization.
 - **📊 Reports & Interest:** Generate statements and calculate interest.
 - **🛡 Error Handling:** Input validation, data integrity checks, and logging.
@@ -41,6 +40,52 @@ Project developed at PES University as part of foundational systems programming.
 ---
 
 ## 🧩 System Architecture
+
+Banking Management System
+│
+├── Global Definitions & Constants
+│   ├── #includes (stdio.h, stdlib.h, string.h, etc.)
+│   ├── #defines (MAX_ACCOUNTS, FILE NAMES, etc.)
+│   ├── Structs
+│   │   ├── Account
+│   │   └── Transaction
+│   ├── Global Variables
+│       ├── accounts[]
+│       ├── transactions[]
+│       ├── acc_count
+│       └── trans_count
+│
+├── Utility Functions
+│   ├── clear_input_buffer()
+│   ├── is_valid_phone()
+│   ├── get_valid_amount()
+│   ├── get_current_date()
+│   └── generate_account_number()
+│
+├── Transaction Management
+│   └── add_transaction()
+│
+├── File Operations
+│   ├── save_data()
+│   └── load_data()
+│
+├── Account Operations
+│   ├── create_account()
+│   ├── view_accounts()
+│   ├── find_account_index()
+│   ├── deposit()
+│   ├── withdraw()
+│   ├── transfer_funds()
+│   ├── search_account()
+│   ├── modify_account()
+│   ├── delete_account()
+│
+├── Reporting
+│   ├── view_transactions()
+│   ├── generate_statement()
+│   └── search_by_name()
+│
+└── (Main Menu Logic - assumed but not shown in the snippet)
 
          
 
