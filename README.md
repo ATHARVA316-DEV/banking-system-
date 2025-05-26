@@ -42,38 +42,19 @@ Project developed at PES University as part of foundational systems programming.
 
 ## 🧩 System Architecture
 
-
-                        +--------------------+
-                        |    Main Menu       |
-                        +--------------------+
-                                  |
-             +-------------------+-------------------+
-             |                                       |
-     +---------------+                       +--------------+
-     | Admin Module  |                       | User Module  |
-     +---------------+                       +--------------+
-             |                                       |
-     +----------------------+             +----------------------+
-     | User Account Control |             | Transaction Manager  |
-     +----------------------+             +----------------------+
-             |                                       |
-     +----------------------------+     +----------------------------+
-     | File Storage (accounts.db) |<--->| File Storage (txnlog.db)  |
-     +----------------------------+     +----------------------------+
---
-
+         
 
 
 ## 🧱 Code Overview 
 
-| Part             | Description                                |
-|------------------|--------------------------------------------|
-| `Utility`        | Input validation, formatting, utilities    |
-| `File Handling`  | File operations, backups, logging          |
-| `transaction.dat`| Deposit, withdrawal, transfer, history     |
-| `security.c`     | Login system, hashing, access control      |
-| `filemanager.c`  | File operations, backups, logging          |
-| `utils.c`        | Input validation, formatting, utilities    |
+| Part                  | Description                                   |
+|-----------------------|-----------------------------------------------|
+| `Utility`             | Input validation, formatting, utilities       |
+| `File Handling`       | File operations, backups, logging             |
+| `Account Operations`  | Add Account, Modify Accounts, Delete Accounts |
+| `Main Function`       | Menu Driven Main function, Transactions       |
+| `transaction.dat`     | Deposit, withdrawal, transfer, history        |
+| `bank_data.dat`       | Banking Details, Account Details              |
 
 ---
 
