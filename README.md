@@ -64,24 +64,19 @@ Project developed at PES University as part of foundational systems programming.
 
 
 
-## 🧱 Module Overview
+## 🧱 Code Overview 
 
-| File             | Description                                |
+| Part             | Description                                |
 |------------------|--------------------------------------------|
-| `main.c`         | Entry point, menu system                   |
-| `user.c`         | Account creation, update, delete, view     |
-| `transaction.c`  | Deposit, withdrawal, transfer, history     |
+| `Utility`        | Input validation, formatting, utilities    |
+| `File Handling`  | File operations, backups, logging          |
+| `transaction.dat`| Deposit, withdrawal, transfer, history     |
 | `security.c`     | Login system, hashing, access control      |
 | `filemanager.c`  | File operations, backups, logging          |
 | `utils.c`        | Input validation, formatting, utilities    |
 
 ---
 
-## ▶️ Usage
-bash
-# Compile the project
-gcc main.c user.c transaction.c security.c filemanager.c utils.c -o bank
- 
 
 
 ## 🧠 How It Works
