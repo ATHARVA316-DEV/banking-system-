@@ -21,11 +21,8 @@ Project developed at PES University as part of foundational systems programming.
 
 - [Features](#features)
 - [System Architecture](#system-architecture)
-- [Module Overview](#module-overview)
-- [Usage](#usage)
-- [How It Works](#how-it-works)
-- [Challenges & Solutions](#challenges--solutions)
-- [Team](#team)
+- [Code Overview](#code-overview)
+
 
 ---
 
